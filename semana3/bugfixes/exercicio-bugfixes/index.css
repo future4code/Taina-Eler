@@ -26,7 +26,7 @@ button:focus {
 }
 
 img {
-    width: 100px;
+    width: 50px;
 }
 
 div>p:first-child {
@@ -58,6 +58,8 @@ div>p:first-child {
 .icone {
     height: 15px;
 }
+
+
 
 
 /** 
@@ -114,6 +116,13 @@ td button {
     color: black;
 }
 
+td button:active{
+    color: white;
+}
+
+td button:hover{
+    background-color:rgb(236, 160, 19);
+}
 .container-do-search {
     margin-top: 20px;
     height: 100px;
@@ -128,6 +137,10 @@ td button {
     border-radius: 5px;
     font-size: 10px;
     color: black;
+}
+
+#back-button:active{
+    color: white;
 }
 
 #back-button:hover {
