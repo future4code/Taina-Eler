@@ -1,0 +1,65 @@
+body{
+    margin: 0;
+}
+
+#fundo-de-tela-inicial{
+    width: 100vw; /*100% da largura da tela*/
+    height: 100vh; /*100% da altura da tela*/
+    background: url('./img/Super-nintendo-wallpaper-android.jpg');
+    background-size: cover;
+}
+
+#fundo-de-tela-cor{
+    background-color: rgb(65, 64, 64);
+}
+
+.fundo-dos-nomes-paginas{
+    background-color: rgb(13, 13, 224); /*fundo dos nomes das página*/
+    border: 5px solid black;
+}
+
+#fonte-titulo{
+    font-family: fantasy;
+    font-size: 60px;
+}
+
+section{
+    margin: 50px auto;
+    width: 1025px;
+    height: 150px;
+}
+
+.rede{
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin-left: 25px;
+    transition: all 0.4s ease-out;
+    border-radius: 50%;
+}
+.rede:hover{
+    cursor: pointer;
+    transform: translateY(-20px);
+    box-shadow: 4px 30px 16px 0px;
+}
+
+#twiter{
+    background-color: #2372a3;
+}
+#facebook{
+    background-color: #082a3f;
+}
+#instagram{
+    background-color: #af0a57;
+}
+.icone{
+    margin: 0px auto;
+    padding: 35px;
+    width: 80px;
+}
+#fundo-de-tela-console{
+    width: 100vw; /*100% da largura da tela*/
+    height: 100vh; /*100% da altura da tela*/
+    background: url('./img/console.jpg');
+    background-size: cover;
+}
