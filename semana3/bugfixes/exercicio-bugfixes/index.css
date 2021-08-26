@@ -161,3 +161,12 @@ td button:hover{
 .borda{
     border-width: 0px 0px 2px 0px;
 }
+
+.fonte{
+    font-family: 'Roboto' , sans-serif;
+}
+
+.centraliza-tabela{
+    margin-left: auto;
+    margin-right: auto;
+}
