@@ -137,3 +137,8 @@ td button {
 .centralizando{
     text-align: center;
 }
+
+.tamanho{
+    height: 60px;
+    width: 75px;
+}
