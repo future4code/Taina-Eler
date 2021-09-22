@@ -1,40 +1,42 @@
 
-import './App.css';
 import React from 'react';
-import Cadastro from './components/Cadastro'
+import Cadastro from './components/Cadastro';
 import ListaUsuarios from './components/ListaUsuarios';
+
 
 
 class App extends React.Component {
 
   state ={
-    paginaCadastro: false
+    telaAtual: "cadastro"
   }
 
-  listaDeNomes = ()=>{
-    this.setState({paginaCadastro: true})
-  }
 
-  cadastrandoUsuarios = ()=>{
-    this.setState({paginaCadastro: false})
-  }
-
-  renderizaPagina = ()=>{
-    if(this.state.paginaCadastro){
-      return <ListaUsuarios cadastrandoUsuarios={this.cadastrandoUsuarios}/>
-    }else{
-      return <Cadastro listaDeNomes={this.listaDeNomes}/>;
+  //Renderizando telas
+  escolheTela = ()=>{
+    switch(this.state.telaAtual){
+      case "cadastro":
+        return <Cadastro irParaListaUsuarios={this.irParaListaUsuarios}/>
+      case "listaUsuarios":
+        return <ListaUsuarios irParaCadastro={this.irParaCadastro}/>
+      default:
+        return "Página não encontrada!"
     }
   }
 
+  irParaCadastro = ()=>{
+    this.setState({telaAtual: "cadastro"})
+  }
 
- 
+  irParaListaUsuarios = ()=>{
+    this.setState({telaAtual:"listaUsuarios"})
+  }
 
   render(){
     
     return (
       <div>
-        {this.renderizaPagina()}
+        {this.escolheTela()}
       </div>
     );
   }

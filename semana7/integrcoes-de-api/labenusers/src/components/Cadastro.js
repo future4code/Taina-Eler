@@ -1,6 +1,14 @@
 import React from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import styled from 'styled-components';
 
+
+const ContainerPagina = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
 
 const headers = {
       headers:{
@@ -8,65 +16,49 @@ const headers = {
       }
     } 
 
-  
-
 class Cadastro extends React.Component{
 
-    state ={
-        
-        usuarios: [],
-        userName: "",
-        userEmail: ""
-      }
+  state ={
+    userName: "",
+    userEmail: ""
+  }
 
-    componentDidMount(){
-        this.getAllUsers();
-      };
-    
-    //Criando Usuários
-      createUser = ()=>{
-        const url = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
-    
-        const body = {
-          name: this.state.userName,
-          email: this.state.userEmail
-        };
-    
-        axios.post(url, body, headers)
-        .then((resposta) =>{
-            console.log(resposta)
-          alert("Email cadastrado com sucesso!")
-          this.setState({userName: "", userEmail: ""})
-          this.getAllUsers();
-        })
-        .catch((error) =>{
-          alert(error.response.data.message)
-        })
-      }
-    
-      onChangeName = (event)=>{
-        this.setState({userName: event.target.value})
-      }
-    
-      onChangeEmail = (event)=>{
-        this.setState({userEmail: event.target.value})
-      }
-    
-      //Pegando Usuários (verificando)
-      getAllUsers = () =>{
-        const url = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
-    
-        axios.get(url, headers)
-        .then((resposta) =>{
-          console.log(resposta)
-        })
-        .catch((error) =>{
-          alert(error.response)
-        })
-      }
+  
+
+//Criando Usuários
+  createUser = ()=>{
+    const url = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
+
+    const body = {
+      name: this.state.userName,
+      email: this.state.userEmail
+    };
+
+    axios.post(url, body, headers)
+    .then((resposta) =>{
+        console.log(resposta)
+      alert("Usuário cadastrado com sucesso!")
+      this.setState({userName: "", userEmail: ""})
+    })
+    .catch((error) =>{
+      alert(error.response.data.message)
+    })
+  }
+
+  
+
+  onChangeName = (event)=>{
+    this.setState({userName: event.target.value})
+  }
+
+  onChangeEmail = (event)=>{
+    this.setState({userEmail: event.target.value})
+  }
+ 
     render(){
         return(
-            <div>
+            <ContainerPagina>
+              <button onClick={this.props.irParaListaUsuarios}>Página de Usuários</button>
                 <h1>Cadastro de Usuário</h1>
                 <input 
                 placeholder="Insira seu nome"
@@ -80,10 +72,8 @@ class Cadastro extends React.Component{
                onChange={this.onChangeEmail}
                />
 
-              <button onClick={this.props.createUser}>Enviar</button>
-        
-              <button onClick={this.props.listaDeNomes}>Página de Usuários</button>
-            </div>
+               <button onClick={this.createUser}>Enviar</button>
+            </ContainerPagina>
         )
     }
 }
