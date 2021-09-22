@@ -3,11 +3,20 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 
-const ContainerPagina = styled.div`
+const ContainerConteudo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`
+const Header = styled.header`
+  height: 60px;
+  background: rgb(9,97,121);
+  background: linear-gradient(166deg, rgba(9,97,121,0.7278207500329179) 11%, rgba(19,69,115,1) 52%, rgba(24,54,111,0.4384949073362886) 76%, rgba(34,36,150,1) 100%);
+  display: flex;
+  align-items: center;
+  padding-left: 18px;
+  margin-bottom: 35px;
 `
 
 const headers = {
@@ -57,8 +66,12 @@ class Cadastro extends React.Component{
  
     render(){
         return(
-            <ContainerPagina>
+          <div>
+            <Header>
               <button onClick={this.props.irParaListaUsuarios}>Página de Usuários</button>
+            </Header>
+
+            <ContainerConteudo>
                 <h1>Cadastro de Usuário</h1>
                 <input 
                 placeholder="Insira seu nome"
@@ -73,7 +86,9 @@ class Cadastro extends React.Component{
                />
 
                <button onClick={this.createUser}>Enviar</button>
-            </ContainerPagina>
+            </ContainerConteudo>
+          </div>
+            
         )
     }
 }

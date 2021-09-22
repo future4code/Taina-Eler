@@ -1,8 +1,16 @@
 
 import React from 'react';
+import { createGlobalStyle } from 'styled-components';
 import Cadastro from './components/Cadastro';
 import ListaUsuarios from './components/ListaUsuarios';
 
+const GlobalStyle = createGlobalStyle`
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+` 
 
 
 class App extends React.Component {
@@ -10,8 +18,6 @@ class App extends React.Component {
   state ={
     telaAtual: "cadastro"
   }
-
-
   //Renderizando telas
   escolheTela = ()=>{
     switch(this.state.telaAtual){
@@ -36,6 +42,7 @@ class App extends React.Component {
     
     return (
       <div>
+        <GlobalStyle/>
         {this.escolheTela()}
       </div>
     );
