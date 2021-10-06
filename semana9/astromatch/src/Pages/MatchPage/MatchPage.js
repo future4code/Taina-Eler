@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
 
 const MatchContainer = styled.div`
@@ -12,15 +13,34 @@ const MatchPeople =styled.div`
 `
 
 const MatchPage = (props) => {
+  const[matchesList, setMatchesList] = useState([])
+
+  useEffect(()=>{
+    getMatches()
+  },[])
+
+  const getMatches = ()=>{
+    const url4 = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/taina-soares-maryam/matches"
+
+    axios.get(url4)
+    .then((res)=>{
+      console.log(res.data)
+      setMatchesList(res.data.matches)
+    })
+    .catch((err)=>{
+      console.log(err.response)
+    })
+  }
+
+  const match = matchesList.map(eachMatch=>{
+    return <div>{eachMatch.name}</div>
+  })
     return (
         <MatchContainer>
             <button onClick={() => props.choosePage("home")}>Home</button>
             <p>MatchPage</p>
             <MatchPeople>
-                <div>Match1</div>
-                <div>Match2</div>
-                <div>Match3</div>
-                <div>Match4</div>
+               {match}
             </MatchPeople>
         </MatchContainer>
     )

@@ -1,18 +1,31 @@
-import React,{useState} from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
-import CardPerson from '../../CardPerson'
 
+const HomePageContainer = styled.div`
+   display: flex;
+   align-items: center;
+   justify-content: center;
+`
+const ProfileImage = styled.img`
+  width: 300px;
+  
+`
 const MainContainer = styled.div`
-  height:500px;
   width: 400px;
   border:1px solid black;
-  margin: 75px auto;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px;
+  padding: 12px;
 `
 const MatchButton = styled.div`
   display: flex;
   border: 1px solid blue;
-  justify-content: space-evenly;
+  width: 400px;
+  justify-content: space-around;
   p{
       cursor: pointer;
   }
@@ -20,27 +33,61 @@ const MatchButton = styled.div`
 
 const HomePage = (props) => {
 
-    const[profiles, setProfiles] = useState({
-        profile: {
-            id: "OS2w9vU9AUkmXhp4sZ7M",
-            name: "Leia Organa",
-            bio: "Interessada em construir uma família e proteger os desamparados",
-            photo: "https://upload.wikimedia.org/wikipedia/en/thumb/1/1b/Princess_Leia%27s_characteristic_hairstyle.jpg/220px-Princess_Leia%27s_characteristic_hairstyle.jpg",
-            age: 23
+    const [profiles, setProfiles] = useState({})
+
+    useEffect(() => {
+        getProfiles()
+        
+    }, [])
+
+    
+    const getProfiles = () => {
+        const url = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/taina-soares-maryam/person"
+        axios.get(url)
+            .then((res) => {
+                setProfiles(res.data.profile)
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
+    }
+   
+
+    const chooseProfiles = (profileId, sn)=>{
+        const url2 = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/taina-soares-maryam/choose-person"
+        const headers = "Content-Type: application/json"
+        const body = {
+            id: profileId,
+            choice: sn
         }
-    })
+        axios.post(url2,body, headers)
+        .then((res)=>{
+            console.log(res.data)
+            getProfiles()
+        })
+        .catch((err)=>{
+            console.log(err.response)
+        })
+    }
+
     return (
-        <div>
+        <HomePageContainer>
+            {!profiles? <div>Aperte em clear</div>:
             <MainContainer>
-                <button onClick={() => props.choosePage("match")}>Lista de Matches</button>
-                <CardPerson/>
+                
+                <div>
+                    <button onClick={() => props.choosePage("match")}>Lista de Matches</button>
+                </div>
+                <ProfileImage src={profiles.photo} alt="Perfil" />
+                <h4>{profiles.name}, {profiles.age}</h4>
+                <p>{profiles.bio}</p>
                 <MatchButton>
-                    <p>&#10006;</p>
-                    <p>&#10084;</p>
+                    <p onClick={()=>chooseProfiles(profiles.id, false)}>&#10006;</p>
+                    <p onClick={()=>chooseProfiles(profiles.id , true)}>&#10084;</p>
                 </MatchButton>
             </MainContainer>
-
-        </div>
+                }
+        </HomePageContainer>
     )
 }
 
