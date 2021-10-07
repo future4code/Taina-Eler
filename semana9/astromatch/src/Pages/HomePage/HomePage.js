@@ -1,35 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import styled from "styled-components"
-
-const HomePageContainer = styled.div`
-   display: flex;
-   align-items: center;
-   justify-content: center;
-`
-const ProfileImage = styled.img`
-  width: 300px;
-  
-`
-const MainContainer = styled.div`
-  width: 400px;
-  border:1px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 50px;
-  padding: 12px;
-`
-const MatchButton = styled.div`
-  display: flex;
-  border: 1px solid blue;
-  width: 400px;
-  justify-content: space-around;
-  p{
-      cursor: pointer;
-  }
-`
+import { HomePageContainer, MainContainer, ChooseButton, MatchButton } from "./styled"
+import CardPerson from '../../components/CardPerson/CardPerson'
 
 const HomePage = (props) => {
 
@@ -37,10 +9,10 @@ const HomePage = (props) => {
 
     useEffect(() => {
         getProfiles()
-        
+
     }, [])
 
-    
+
     const getProfiles = () => {
         const url = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/taina-soares-maryam/person"
         axios.get(url)
@@ -51,42 +23,59 @@ const HomePage = (props) => {
                 console.log(err.response)
             })
     }
-   
 
-    const chooseProfiles = (profileId, sn)=>{
+
+    const chooseProfiles = (profileId, choose) => {
         const url2 = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/taina-soares-maryam/choose-person"
         const headers = "Content-Type: application/json"
         const body = {
             id: profileId,
-            choice: sn
+            choice: choose
         }
-        axios.post(url2,body, headers)
-        .then((res)=>{
-            console.log(res.data)
-            getProfiles()
-        })
-        .catch((err)=>{
-            console.log(err.response)
-        })
+        axios.post(url2, body, headers)
+            .then((res) => {
+                console.log(res.data)
+                getProfiles()
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
+    }
+
+    const clearProfiles = () => {
+        const url3 = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/taina-soares-maryam/clear"
+        const headers = "Content-Type: application/json"
+        axios.put(url3, headers)
+            .then((res) => {
+                console.log(res.data)
+                getProfiles()
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
     }
 
     return (
         <HomePageContainer>
-            {!profiles? <div>Aperte em clear</div>:
-            <MainContainer>
-                
-                <div>
-                    <button onClick={() => props.choosePage("match")}>Lista de Matches</button>
-                </div>
-                <ProfileImage src={profiles.photo} alt="Perfil" />
-                <h4>{profiles.name}, {profiles.age}</h4>
-                <p>{profiles.bio}</p>
-                <MatchButton>
-                    <p onClick={()=>chooseProfiles(profiles.id, false)}>&#10006;</p>
-                    <p onClick={()=>chooseProfiles(profiles.id , true)}>&#10084;</p>
-                </MatchButton>
-            </MainContainer>
-                }
+            {!profiles ? <div><strong>Aperte em clear</strong><button onClick={clearProfiles}>CLEAR</button></div> :
+                <MainContainer>
+                    <MatchButton>
+                        <div>
+                            <p onClick={() => props.choosePage("match")}>&#8644;Matches</p>
+                        </div>
+                    </MatchButton>
+                    <CardPerson
+                        image={profiles.photo}
+                        name={profiles.name}
+                        age={profiles.age}
+                        bio={profiles.bio}
+                    />
+                    <ChooseButton>
+                        <p onClick={() => chooseProfiles(profiles.id, false)}>&#10006;</p>
+                        <p onClick={() => chooseProfiles(profiles.id, true)}>&#10084;</p>
+                    </ChooseButton>
+                </MainContainer>
+            }
         </HomePageContainer>
     )
 }

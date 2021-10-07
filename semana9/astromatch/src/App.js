@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import HomePage from "./Pages/HomePage/HomePage"
 import MatchPage from "./Pages/MatchPage/MatchPage"
 import styled, { createGlobalStyle } from "styled-components"
-import axios from 'axios'
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -10,6 +9,10 @@ const GlobalStyle = createGlobalStyle`
    margin:0;
    box-sizing:border-box;
   }
+ 
+`
+const GlobalDiv = styled.div`
+  background-color: lightgray;
 `
 
 function App() {
@@ -31,23 +34,11 @@ function App() {
     }
   }
 
-  const clearProfiles = ()=>{
-    const url3 = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/taina-soares-maryam/clear"
-    const headers = "Content-Type: application/json"
-    axios.put(url3, headers)
-    .then((res)=>{
-      console.log(res.data)
-    })
-    .catch((err)=>{
-      console.log(err.response)
-    })
-  }
   return (
-    <div>
+    <GlobalDiv>
       <GlobalStyle/>
       {changePage()}
-      <button onClick={clearProfiles}>CLEAR</button>
-    </div>
+    </GlobalDiv>
   );
 }
 

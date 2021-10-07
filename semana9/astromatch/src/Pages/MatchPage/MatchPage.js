@@ -1,49 +1,45 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import styled from "styled-components"
-
-const MatchContainer = styled.div`
-  height:500px;
-  width: 400px;
-  border:1px solid black;
-  margin: 75px auto;
-`
-const MatchPeople =styled.div`
-  border: 1px solid green;
-`
+import { MatchPageContainer, MatchPeopleContainer, MatchPeople } from './styled'
+import CardMatches from '../../components/CardMatches/CardMatches'
 
 const MatchPage = (props) => {
-  const[matchesList, setMatchesList] = useState([])
+  const [matchesList, setMatchesList] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     getMatches()
-  },[])
+  }, [])
 
-  const getMatches = ()=>{
+  const getMatches = () => {
     const url4 = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/taina-soares-maryam/matches"
 
     axios.get(url4)
-    .then((res)=>{
-      console.log(res.data)
-      setMatchesList(res.data.matches)
-    })
-    .catch((err)=>{
-      console.log(err.response)
-    })
+      .then((res) => {
+        console.log(res.data)
+        setMatchesList(res.data.matches)
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
   }
 
-  const match = matchesList.map(eachMatch=>{
-    return <div>{eachMatch.name}</div>
+  const match = matchesList.map(eachMatch => {
+    return <CardMatches 
+    name={eachMatch.name}
+    image={eachMatch.photo}
+    />
   })
-    return (
-        <MatchContainer>
-            <button onClick={() => props.choosePage("home")}>Home</button>
-            <p>MatchPage</p>
-            <MatchPeople>
-               {match}
-            </MatchPeople>
-        </MatchContainer>
-    )
+
+  return (
+    <MatchPageContainer>
+      <MatchPeopleContainer>
+        <div>
+          <button onClick={() => props.choosePage("home")}>Home</button>
+        </div>
+        {match}
+      </MatchPeopleContainer>
+    </MatchPageContainer>
+  )
 }
 
 export default MatchPage;
