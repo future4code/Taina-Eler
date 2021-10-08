@@ -22,5 +22,5 @@ export const InformationContainer = styled.div`
   width: 100%;
   text-align:center;
   padding: 20px;
-  background-color: rgba(232, 232, 232, 0.2);
+  background-color: rgba(232, 232, 232, 0.6);
 `

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { MatchPageContainer, MatchPeopleContainer, MatchPeople } from './styled'
+import { MatchPageContainer, MatchPeopleContainer, HeaderMatches } from './styled'
 import CardMatches from '../../components/CardMatches/CardMatches'
 
 const MatchPage = (props) => {
@@ -33,9 +33,10 @@ const MatchPage = (props) => {
   return (
     <MatchPageContainer>
       <MatchPeopleContainer>
-        <div>
-          <button onClick={() => props.choosePage("home")}>Home</button>
-        </div>
+        <HeaderMatches>
+          <p onClick={() => props.choosePage("home")}>&#8644;Profiles</p>
+          <h3>AstroMatches</h3>
+        </HeaderMatches>
         {match}
       </MatchPeopleContainer>
     </MatchPageContainer>

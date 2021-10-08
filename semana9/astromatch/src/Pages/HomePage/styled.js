@@ -30,11 +30,55 @@ export const ChooseButton = styled.div`
 `
 export const MatchButton = styled.div`
   width: 100%;
-  border-bottom:1px solid black;
-  div > p:hover {
-    width: 20%;
+  border-bottom:2px solid black;
+  div{
+    display: flex;
+    justify-content: space-around;
+
+    p:hover{
+      width: 20%;
     color: red;
     cursor: pointer;
-    border-radius: 5px;
+    }
+    
   }
+`
+export const Refresh = styled.div`
+ width: 386px;
+  height: 530px;
+  border:1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+  padding: 12px;
+  border-radius: 10px;
+  background-color: white;
+  justify-content: center;
+
+  div{
+    height: 60%;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    strong{
+    font-size: 45px;
+  }
+  p{
+    font-size: 45px;
+    cursor: pointer;
+    color: red;
+    :hover{
+      color:black;
+    }
+  }
+  h5{
+    font-size: 20px;
+  }
+  }
+
+  
+
 `

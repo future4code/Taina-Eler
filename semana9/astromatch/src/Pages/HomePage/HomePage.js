@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { HomePageContainer, MainContainer, ChooseButton, MatchButton } from "./styled"
+import { HomePageContainer, MainContainer, ChooseButton, MatchButton, Refresh } from "./styled"
 import CardPerson from '../../components/CardPerson/CardPerson'
 
 const HomePage = (props) => {
@@ -57,11 +57,12 @@ const HomePage = (props) => {
 
     return (
         <HomePageContainer>
-            {!profiles ? <div><strong>Aperte em clear</strong><button onClick={clearProfiles}>CLEAR</button></div> :
+            {!profiles ? <Refresh><div><strong>A página precisa ser restaurada :)</strong><h5>Aperte aqui!&darr;</h5><p onClick={clearProfiles}>&#8635;</p></div></Refresh> :
                 <MainContainer>
                     <MatchButton>
                         <div>
                             <p onClick={() => props.choosePage("match")}>&#8644;Matches</p>
+                            <h3>AstroMatch</h3>
                         </div>
                     </MatchButton>
                     <CardPerson

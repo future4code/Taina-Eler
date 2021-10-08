@@ -5,7 +5,7 @@ import {CardMatchesConteiner} from "./styled"
     return(
         <CardMatchesConteiner>
             <img src={props.image} alt="Perfil" />
-            {props.name}
+            <strong>{props.name}</strong>
         </CardMatchesConteiner>
     )
 }
