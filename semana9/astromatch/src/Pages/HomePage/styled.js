@@ -17,7 +17,9 @@ export const MainContainer = styled.div`
   padding: 12px;
   border-radius: 10px;
   background-color: white;
+  box-shadow: 2px 2px 5px black;
 
+  
 `
 export const ChooseButton = styled.div`
   display: flex;
@@ -55,6 +57,7 @@ export const Refresh = styled.div`
   border-radius: 10px;
   background-color: white;
   justify-content: center;
+  box-shadow: 2px 2px 5px black;
 
   div{
     height: 60%;

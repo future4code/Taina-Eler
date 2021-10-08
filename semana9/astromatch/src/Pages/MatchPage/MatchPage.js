@@ -25,6 +25,7 @@ const MatchPage = (props) => {
 
   const match = matchesList.map(eachMatch => {
     return <CardMatches 
+    key={eachMatch.id}
     name={eachMatch.name}
     image={eachMatch.photo}
     />

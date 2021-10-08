@@ -17,6 +17,7 @@ export const MatchPeopleContainer = styled.div`
   padding: 12px;
   border-radius: 10px;
   background-color: white;
+  box-shadow: 2px 2px 5px black;
   
 `
 export const HeaderMatches = styled.div`

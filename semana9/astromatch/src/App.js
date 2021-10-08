@@ -1,19 +1,7 @@
 import React, { useState } from 'react'
 import HomePage from "./Pages/HomePage/HomePage"
 import MatchPage from "./Pages/MatchPage/MatchPage"
-import styled, { createGlobalStyle } from "styled-components"
-
-const GlobalStyle = createGlobalStyle`
-  *{
-   padding:0;
-   margin:0;
-   box-sizing:border-box;
-  }
- 
-`
-const GlobalDiv = styled.div`
-  background-color: lightgray;
-`
+import { GlobalDiv, GlobalStyle } from './styled'
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home")
