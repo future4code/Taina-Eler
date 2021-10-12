@@ -6,6 +6,15 @@ import LoginPage from "./Pages/LoginPage/LoginPage"
 import AdminHomePage from "./Pages/AdminHomePage/AdminHomePage"
 import CreateTripPage from "./Pages/CreateTripPage/CreateTripPage"
 import TripDetailsPage from "./Pages/TripDetailsPage/TripDetailsPage"
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyled = createGlobalStyle`
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+`
 
 function App() {
   const[currentPage, setCurrentPage] = useState("home")
@@ -36,6 +45,7 @@ function App() {
   }
   return (
     <div>
+      <GlobalStyled/>
       {changePage()}
     </div>
   );
