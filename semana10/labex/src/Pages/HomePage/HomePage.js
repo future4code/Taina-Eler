@@ -1,6 +1,9 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 import styled from "styled-components"
-import BackImage from "../../components/imgs/1.jpg"
+import { goToPage } from '../../components/Functions/Functions'
+import BackImage from "../../components/imgs/2.jpg"
+
 
 const BackgroungImage = styled.div`
   background-image: url('${BackImage}');
@@ -28,12 +31,14 @@ const Buttons = styled.div`
 
 `
 const HomePage = () => {
+    const history = useHistory()
+
     return (
         <BackgroungImage>
             <HomeInformation>
                 <h3>HomePage</h3>
                 <Buttons>
-                    <button>viagens</button>
+                    <button onClick={()=>{goToPage(history, "/trips/list")}}>viagens</button>
                     <button>login</button>
                 </Buttons>
             </HomeInformation>
