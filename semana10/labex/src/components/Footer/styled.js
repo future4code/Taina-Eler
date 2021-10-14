@@ -21,6 +21,7 @@ export const SocialMedias = styled.div`
 `
 
 export const InformationsFooter = styled.div`
+  flex-shrink: 0;
   display: flex;
   justify-content: space-evenly;
   width:100%;

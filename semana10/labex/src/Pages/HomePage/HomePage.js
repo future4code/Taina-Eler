@@ -36,10 +36,10 @@ const HomePage = () => {
     return (
         <BackgroungImage>
             <HomeInformation>
-                <h3>HomePage</h3>
+                <h3>LabeX</h3>
                 <Buttons>
                     <button onClick={()=>{goToPage(history, "/trips/list")}}>viagens</button>
-                    <button>login</button>
+                    <button onClick={()=>{goToPage(history, "/login")}}>login</button>
                 </Buttons>
             </HomeInformation>
         </BackgroungImage>

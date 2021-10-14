@@ -24,6 +24,8 @@ const ListTripsPage = () => {
         getListTrips()
     }, [])
 
+    
+
     const trips = listTrips.map((eachTrip) => {
         return <CardListTrips 
         key={eachTrip.name}
