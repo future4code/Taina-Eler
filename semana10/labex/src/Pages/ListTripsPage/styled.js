@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
-export const CreateForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-export const CreateTripHeader = styled.div`
+export const ListTripsPageHeader = styled.div`
   height: 10vh;
  display: flex;
  justify-content: flex-end;
@@ -14,8 +8,10 @@ export const CreateTripHeader = styled.div`
  background-color: black;
  color:white;
  padding-right: 30px;
+ 
  button{
-  width: 8vw;
-  border-radius: 10px;
+     margin-right: 30px;
+     width: 8vw;
+     border-radius: 10px;
  }
 `

@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import { useHistory, useParams } from 'react-router'
+import { goBack } from '../../components/Functions/Functions'
+import { CardDetailsTrip } from '../../components/CardDetailsTrip/CardDetailsTrip'
+import { CardCandidates } from '../../components/CardCandidates/CardCandidates'
+import {TripDetailHeader} from "./styled"
 
 
- const TripDetailsPage = (props) =>{
+ const TripDetailsPage = () =>{
+     const history = useHistory()
      const [tripsDetails, setTripsDetails] = useState({})
      const token = localStorage.getItem("token")
+     const{id} = useParams()
+     console.log(id)
 
      const getTripsDetails = (id) =>{
          const urlDetail = `https://us-central1-labenu-apis.cloudfunctions.net/labeX/taina-soares-maryam/trip/${id}`
@@ -15,7 +23,7 @@ import axios from "axios"
              }
          })
          .then((response)=>{
-             console.log(response.data.trip)
+             setTripsDetails(response.data.trip)
          })
          .catch((error)=>{
              console.log(error.response)
@@ -23,15 +31,20 @@ import axios from "axios"
      }
 
      useEffect(()=>{
-         getTripsDetails(props.tripId)
+         getTripsDetails(id)
      },[])
 
 
 
      return (
          <div>
-             <h3>TripDetailsPage</h3>
+             <TripDetailHeader>
+                 <button onClick={()=>goBack(history, "/admin/trips/list")}>Voltar</button>
+             </TripDetailHeader>
              <h1>{tripsDetails.name}</h1>
+             <CardDetailsTrip name={tripsDetails.name}/>
+             <h2>Candidatos</h2>
+             <CardCandidates/>
          </div>
      )
 

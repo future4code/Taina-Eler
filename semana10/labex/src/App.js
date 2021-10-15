@@ -17,7 +17,7 @@ function App() {
     <div>
       <GlobalStyled/>
       <Router/>
-      {/* <Footer/> */}
+      <Footer/>
     </div>
   );
 }

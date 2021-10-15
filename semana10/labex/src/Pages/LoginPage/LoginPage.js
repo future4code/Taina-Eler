@@ -42,7 +42,7 @@ const LoginPage = () => {
     return (
         <LoginPageContainer>
             <HeaderLogin>
-                <button onClick={() => { goBack(history, "/") }}>Voltar</button>
+                <button onClick={() => { goBack(history, "/") }}>Home</button>
             </HeaderLogin>
             <Meio>
                 <ImageLogin>

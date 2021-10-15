@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { goBack, goToPage } from '../../components/Functions/Functions'
 import { CardListTrips } from '../../components/CardListTrips/CardListTrips'
+import {ListTripsPageHeader} from "./styled"
 
 const ListTripsPage = () => {
     const history = useHistory()
@@ -35,10 +36,10 @@ const ListTripsPage = () => {
 
     return (
         <div>
-            <div>
-                <button onClick={() => { goBack(history, "/") }}>Voltar</button>
+            <ListTripsPageHeader>
+                <button onClick={() => { goBack(history, "/") }}>Home</button>
                 <button onClick={() => { goToPage(history, "/trips/application") }}>Inscreva-se</button>
-            </div>
+            </ListTripsPageHeader>
             {trips}
         </div>
     )

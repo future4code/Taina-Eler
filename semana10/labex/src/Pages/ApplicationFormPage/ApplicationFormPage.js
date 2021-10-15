@@ -1,8 +1,9 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import { goBack, goToPage } from '../../components/Functions/Functions'
+import {ApplicationFormHeader} from "./styled"
 
-const ApplicationFormPage = () =>{
+const ApplicationFormPage = () => {
     const history = useHistory()
 
     // const goBackListTrips = () =>{
@@ -13,11 +14,13 @@ const ApplicationFormPage = () =>{
     // const goToHome = () =>{
     //     history.push("/")
     // }
-    return(
+    return (
         <div>
+            <ApplicationFormHeader>
+                <button onClick={() => { goBack(history, "/trips/application") }}>Voltar</button>
+                <button onClick={() => { goToPage(history, "/") }}>Home</button>
+            </ApplicationFormHeader>
             <h3>ApplicationFormPage</h3>
-            <button onClick={()=>{goBack(history,"/trips/application")}}>Voltar</button>
-            <button onClick={()=>{goToPage(history, "/")}}>Home</button>
         </div>
     )
 }

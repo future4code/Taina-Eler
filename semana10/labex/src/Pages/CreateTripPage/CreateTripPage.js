@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { goBack } from '../../components/Functions/Functions'
 import axios from 'axios'
-import {CreateForm} from "./styled"
+import {CreateForm, CreateTripHeader} from "./styled"
 
 const CreateTripPage = () =>{
     const history = useHistory()
@@ -63,9 +63,9 @@ const CreateTripPage = () =>{
 
     return(
         <div>
-            <div>
+            <CreateTripHeader>
                 <button onClick={()=>goBack(history, "/admin/trips/list")}>Voltar</button>
-            </div>
+            </CreateTripHeader>
             <CreateForm>
                 <input
                  placeholder="Name"

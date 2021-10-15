@@ -4,13 +4,22 @@ import styled from "styled-components"
 export const LoginPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: lightgray;
+  background: rgb(7,7,7);
+  background: linear-gradient(175deg, rgba(7,7,7,0.8542252444149403) 12%, rgba(25,19,115,0.7306297387969628) 45%);
+
 `
 export const HeaderLogin = styled.div`
  height: 10vh;
-
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
  background-color: black;
  color:white;
+ padding-right: 30px;
+ button{
+  width: 8vw;
+  border-radius: 10px;
+ }
 `
 export const Meio = styled.div`
  display: flex;
@@ -25,6 +34,8 @@ export const ImageLogin = styled.div`
   img{
       width: 80%;
       padding-left: 12px;
+      border-radius: 30px;
+      box-shadow: 5px 5px 10px black;
   }
 `
 export const InputLogin = styled.div`

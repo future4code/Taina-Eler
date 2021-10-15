@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
-export const CreateForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-export const CreateTripHeader = styled.div`
+export const TripDetailHeader = styled.div`
   height: 10vh;
  display: flex;
  justify-content: flex-end;

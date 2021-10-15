@@ -9,4 +9,10 @@ export const CardListTripsAdminContainer = styled.div`
    width: 35%;
    height: 8vh;
    margin-top: 10px;
+   h2{
+    cursor: pointer;
+    :hover{
+      color: blue;
+    }
+  }
 `

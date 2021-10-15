@@ -1,34 +1,15 @@
 
-import React, { useState } from "react"
+import React from "react"
 import { useHistory } from "react-router"
+// import TripDetailsPage from "../../Pages/TripDetailsPage/TripDetailsPage"
 import { goToPage } from "../Functions/Functions"
 import Trash from "../imgs/trash.png"
 import {CardListTripsAdminContainer} from "./styled"
 
 
 export const CardListTripsAdmin = (props) =>{
-    const history = useHistory()
-    // const token = localStorage.getItem("token")
-
-    // const deleteTrip = (id) =>{
-    //     const urlDelete=`https://us-central1-labenu-apis.cloudfunctions.net/labeX/taina-soares-maryam/trips/${id}`
-
-    //     axios.delete(urlDelete, {
-    //         headers:{
-    //             auth: token
-    //         }
-    //     })
-    //     .then((response)=>{
-    //         console.log(response)
-
-    //     })
-    //     .catch((error)=>{
-    //         console.log(error.response)
-    //     })
-
-    // }
-
-
+     const history = useHistory()
+    console.log(props.tripId)
     return(
         <CardListTripsAdminContainer>
             <h2 onClick={()=>goToPage(history,`/admin/trips/${props.tripId}`)}>{props.name}</h2>
