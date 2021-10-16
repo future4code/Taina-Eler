@@ -3,38 +3,41 @@ import { useHistory } from 'react-router'
 import { goBack, goToPage } from '../../components/Functions/Functions'
 import {ApplicationFormHeader, Form} from "./styled"
 import axios from 'axios'
-import { useForm } from '../../hooks/useForm'
 
 const ApplicationFormPage = () => {
     const history = useHistory()
     const [trips, setTrips] = useState([])
-    
+    const [tripId, setTripId]= useState("")
 
-    // const [nome, setNome] = useState("")
-    // const [idade, setIdade] = useState(0)
-    // const [texto, setTexto] = useState("")
-    // const [profissao, setProfissao] = useState("")
-    // const [pais, setPais] = useState("")
+    const [nome, setNome] = useState("")
+    const [idade, setIdade] = useState(0)
+    const [texto, setTexto] = useState("")
+    const [profissao, setProfissao] = useState("")
+    const [pais, setPais] = useState("")
     // const [viagem, setViagem] = useState([])
 
-    // const onChangeNome = (event)=>{
-    //     setNome(event.target.value)
-    // }
-    // const onChangeIdade = (event)=>{
-    //     setIdade(event.target.value)
-    // }
-    // const onChangeTexto = (event)=>{
-    //     setTexto(event.target.value)
-    // }
-    // const onChangeProfissao = (event)=>{
-    //     setProfissao(event.target.value)
-    // }
-    // const onChangePais = (event)=>{
-    //     setPais(event.target.value)
-    // }
+    const onChangeNome = (event)=>{
+        setNome(event.target.value)
+    }
+    const onChangeIdade = (event)=>{
+        setIdade(event.target.value)
+    }
+    const onChangeTexto = (event)=>{
+        setTexto(event.target.value)
+    }
+    const onChangeProfissao = (event)=>{
+        setProfissao(event.target.value)
+    }
+    const onChangePais = (event)=>{
+        setPais(event.target.value)
+    }
     // const onChangeViagem = (event)=>{
     //     setViagem(event.target.value)
     // }
+
+    const onChangeTrip = (event)=>{
+        setTripId(event.target.value)
+    }
 
     useEffect(()=>{
         const urlTrips = "https://us-central1-labenu-apis.cloudfunctions.net/labeX/taina-soares-maryam/trips"
@@ -45,10 +48,9 @@ const ApplicationFormPage = () => {
             })
     },[])
 
-    const onSubmitApplication = (id) =>{
-        const idTrip = trips.map((item)=>item.id)
-        // event.preventDefault()
-        const urlApply = `https://us-central1-labenu-apis.cloudfunctions.net/labeX/taina-soares-maryam/trips/${idTrip}/apply`
+    const onSubmitApplication = (event) =>{
+        event.preventDefault()
+        const urlApply = `https://us-central1-labenu-apis.cloudfunctions.net/labeX/taina-soares-maryam/trips/${tripId}/apply`
         const bodyApply = {
             name: nome,
             age: idade,
@@ -114,13 +116,15 @@ const ApplicationFormPage = () => {
                 </select>
 
                 <label><strong>Viagem: </strong></label>
-                <select value={viagem} onChange={onChangeViagem}>
+                <select defaultValue=""  onChange={onChangeTrip}>
                    {trips.map((trip)=>{
                        return <option value={trip.id}>{trip.name}</option>
                    })}
                 </select>
+                
+                <button  type={"submit"}>Enviar</button>
             </Form>
-            <button  type={"submit"}>Enviar</button>
+            
         </div>
     )
 }
