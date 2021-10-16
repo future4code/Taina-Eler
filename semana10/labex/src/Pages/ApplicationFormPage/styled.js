@@ -15,3 +15,9 @@ export const ApplicationFormHeader =  styled.div`
      border-radius: 10px;
  }
 `
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`

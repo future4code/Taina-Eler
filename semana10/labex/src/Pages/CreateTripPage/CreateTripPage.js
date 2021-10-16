@@ -93,7 +93,7 @@ const CreateTripPage = () =>{
                 />
                 <input
                  placeholder="Duration in Days"
-                 type="duration"
+                 type="number"
                  value={duration}
                  onChange={onChangeDuration}
                 />
