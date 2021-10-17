@@ -44,7 +44,7 @@ export const InputLogin = styled.div`
   align-items: center;
   justify-content: center;
 
-  h3{
+  h1{
       font-size: 35px;
       margin-bottom: 25px;
   }
@@ -57,8 +57,14 @@ export const InputLogin = styled.div`
       border-radius: 5px;
   }
 
+
   button{
-      font-size: 18px;
-      margin-top: 12px;
+    margin-top: 20px;
+    border-radius: 10px;
+    width: 10vw;
+    color: white;
+    background-color: black;
+    font-size: 20px;
   }
+  
 `

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router'
 import axios from "axios"
 import { CardListTripsAdmin } from "../../components/CardListTripsAdmin/CardListTripsAdmin"
 import { goBack, goToPage } from '../../components/Functions/Functions'
-import { AdminHomePageHeader, AdminHomeBody } from "./styled"
+import { AdminHomePageHeader, AdminHomeBody, AdminPageContainer } from "./styled"
 
 const AdminHomePage = () => {
     const history = useHistory()
@@ -56,16 +56,16 @@ const AdminHomePage = () => {
         />
     })
     return (
-        <div>
+        <AdminPageContainer>
             <AdminHomePageHeader>
                 <button onClick={() => goToPage(history, "/admin/trips/create")}>Criar Viagens</button>
                 <button onClick={() => goBack(history, "/login")}>Logout</button>
             </AdminHomePageHeader>
             <AdminHomeBody>
-                <h1>Viagens</h1>
+                <h1>Admistração das Viagens</h1>
                 {tripsAdmin}
             </AdminHomeBody>
-        </div>
+        </AdminPageContainer>
     )
 }
 

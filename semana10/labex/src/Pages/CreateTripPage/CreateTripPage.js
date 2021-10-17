@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { goBack } from '../../components/Functions/Functions'
 import axios from 'axios'
-import {CreateForm, CreateTripHeader} from "./styled"
+import {CreateForm, CreateTripHeader, PageCreateContainer} from "./styled"
 
 const CreateTripPage = () =>{
     const history = useHistory()
@@ -62,45 +62,50 @@ const CreateTripPage = () =>{
 
 
     return(
-        <div>
+        <PageCreateContainer>
             <CreateTripHeader>
                 <button onClick={()=>goBack(history, "/admin/trips/list")}>Voltar</button>
             </CreateTripHeader>
             <CreateForm>
+                <h1>Criar Viagens</h1>
+                <label><strong>Nome: </strong></label>
                 <input
                  placeholder="Name"
                  type="name"
                  value={name}
                  onChange={onChangeName}
                 />
+                <label><strong>Planeta: </strong></label>
                 <input
                  placeholder="Planet"
                  type="planet"
                  value={planet}
                  onChange={onChangePlanet}
                 />
+                <label><strong>Data: </strong></label>
                 <input
                  id="date"
                  type="date"
                  value={date}
                  onChange={onChangeDate}
                 />
+                <label><strong>Descrição: </strong></label>
                 <input
                  placeholder="Description"
                  type="description"
                  value={description}
                  onChange={onChangeDescription}
                 />
+                <label><strong>Duração em dias: </strong></label>
                 <input
                  placeholder="Duration in Days"
                  type="number"
                  value={duration}
                  onChange={onChangeDuration}
                 />
-                <button onClick={onSubmitTrips}>Submit</button>
+                <button onClick={onSubmitTrips}>Criar</button>
             </CreateForm>
-            
-        </div>
+        </PageCreateContainer>
     )
 }
 

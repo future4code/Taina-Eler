@@ -49,7 +49,7 @@ const LoginPage = () => {
                     <img src={LoginImage} alt="LoginImagem" />
                 </ImageLogin>
                 <InputLogin>
-                    <h3>Welcome</h3>
+                    <h1>Bem Vindo</h1>
                     <input
                         placeholder="email"
                         type="email"

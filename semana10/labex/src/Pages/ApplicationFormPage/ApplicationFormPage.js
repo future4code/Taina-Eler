@@ -1,56 +1,40 @@
-import React, {useEffect, useState} from 'react'
-import { useHistory } from 'react-router'
+import React, { useState, useEffect } from 'react'
+import { useHistory, useParams } from 'react-router'
 import { goBack, goToPage } from '../../components/Functions/Functions'
-import {ApplicationFormHeader, Form} from "./styled"
+import { ApplicationFormHeader, Form, ContainerApplication, PageContainer } from "./styled"
 import axios from 'axios'
 
 const ApplicationFormPage = () => {
+
     const history = useHistory()
-    const [trips, setTrips] = useState([])
-    const [tripId, setTripId]= useState("")
+    const { id } = useParams()
 
     const [nome, setNome] = useState("")
     const [idade, setIdade] = useState(0)
     const [texto, setTexto] = useState("")
     const [profissao, setProfissao] = useState("")
     const [pais, setPais] = useState("")
-    // const [viagem, setViagem] = useState([])
 
-    const onChangeNome = (event)=>{
+    const onChangeNome = (event) => {
         setNome(event.target.value)
     }
-    const onChangeIdade = (event)=>{
+    const onChangeIdade = (event) => {
         setIdade(event.target.value)
     }
-    const onChangeTexto = (event)=>{
+    const onChangeTexto = (event) => {
         setTexto(event.target.value)
     }
-    const onChangeProfissao = (event)=>{
+    const onChangeProfissao = (event) => {
         setProfissao(event.target.value)
     }
-    const onChangePais = (event)=>{
+    const onChangePais = (event) => {
         setPais(event.target.value)
     }
-    // const onChangeViagem = (event)=>{
-    //     setViagem(event.target.value)
-    // }
 
-    const onChangeTrip = (event)=>{
-        setTripId(event.target.value)
-    }
 
-    useEffect(()=>{
-        const urlTrips = "https://us-central1-labenu-apis.cloudfunctions.net/labeX/taina-soares-maryam/trips"
 
-        axios.get(urlTrips)
-            .then((res) => {
-                setTrips(res.data.trips)
-            })
-    },[])
-
-    const onSubmitApplication = (event) =>{
-        event.preventDefault()
-        const urlApply = `https://us-central1-labenu-apis.cloudfunctions.net/labeX/taina-soares-maryam/trips/${tripId}/apply`
+    const onSubmitApplication = (id) => {
+        const urlApply = `https://us-central1-labenu-apis.cloudfunctions.net/labeX/taina-soares-maryam/trips/${id}/apply`
         const bodyApply = {
             name: nome,
             age: idade,
@@ -60,72 +44,75 @@ const ApplicationFormPage = () => {
         }
 
         axios.post(urlApply, bodyApply)
-        .then((response)=>{
-            console.log(response.data)
-        })
-        .catch((error)=>{
-            console.log(error.response)
-        })
+            .then((response) => {
+                alert(response.data.message)
+                setNome("")
+                setIdade(0)
+                setTexto("")
+                setProfissao("")
+                setPais("")
+            })
+            .catch((error) => {
+                console.log(error.response)
+            })
     }
 
+    useEffect(() => {
+        onSubmitApplication(id)
+    }, [])
+
     return (
-        <div>
+        <PageContainer>
             <ApplicationFormHeader>
                 <button onClick={() => { goBack(history, "/trips/application") }}>Voltar</button>
                 <button onClick={() => { goToPage(history, "/") }}>Home</button>
             </ApplicationFormHeader>
-            <h3>ApplicationFormPage</h3>
-            <Form onSubmit={onSubmitApplication}>
-                <label><strong>Nome: </strong></label>
-                <input
-                 placeholder="Nome"
-                 type="name"
-                 value={nome}
-                 onChange={onChangeNome}
-                />
+            <ContainerApplication>
+                <h1>Increva-se para uma de nossas Viagens</h1>
+                <Form>
+                    <label><strong>Nome: </strong></label>
+                    <input
+                        placeholder="Nome"
+                        type="name"
+                        value={nome}
+                        onChange={onChangeNome}
+                    />
 
-                <label><strong>Idade: </strong></label>
-                <input
-                 type="number"
-                 value={idade}
-                 onChange={onChangeIdade}
-                />
+                    <label><strong>Idade: </strong></label>
+                    <input
+                        type="number"
+                        value={idade}
+                        onChange={onChangeIdade}
+                    />
 
-                <label><strong>Texto de Inscrição: </strong></label>
-                <input
-                 placeholder="Explique porque você seria um bom(boa) candidato(a)"
-                 type="text"
-                 value={texto}
-                 onChange={onChangeTexto}
-                />
+                    <label><strong>Texto de Inscrição: </strong></label>
+                    <input
+                        placeholder="Explique porque você seria um bom(boa) candidato(a)"
+                        type="text"
+                        value={texto}
+                        onChange={onChangeTexto}
+                    />
 
-                <label><strong>Profissão: </strong></label>
-                <input
-                 placeholder="Profissão"
-                 type="text"
-                 value={profissao}
-                 onChange={onChangeProfissao}
-                />
+                    <label><strong>Profissão: </strong></label>
+                    <input
+                        placeholder="Profissão"
+                        type="text"
+                        value={profissao}
+                        onChange={onChangeProfissao}
+                    />
 
-                <label><strong>País: </strong></label>
-                <select value={pais} onChange={onChangePais}>
-                    <option value={"brasil"}>Brazil</option>
-                    <option value={"usa"}>USA</option>
-                    <option value={"england"}>England</option>
-                    <option value={"canada"}>Canada</option>
-                </select>
-
-                <label><strong>Viagem: </strong></label>
-                <select defaultValue=""  onChange={onChangeTrip}>
-                   {trips.map((trip)=>{
-                       return <option value={trip.id}>{trip.name}</option>
-                   })}
-                </select>
-                
-                <button  type={"submit"}>Enviar</button>
-            </Form>
-            
-        </div>
+                    <label><strong>País: </strong></label>
+                    <select value={pais} onChange={onChangePais}>
+                        <option value={"Switzerland"}>Switzerland</option>
+                        <option value={"Brazil"}>Brazil</option>
+                        <option value={"USA"}>USA</option>
+                        <option value={"England"}>England</option>
+                        <option value={"Canada"}>Canada</option>
+                    </select>
+                </Form>
+                <button onClick={() => onSubmitApplication(id)}>Enviar</button>
+            </ContainerApplication>
+        </PageContainer>
     )
 }
 

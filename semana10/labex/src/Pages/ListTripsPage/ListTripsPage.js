@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
-import { goBack, goToPage } from '../../components/Functions/Functions'
+import { goBack } from '../../components/Functions/Functions'
 import { CardListTrips } from '../../components/CardListTrips/CardListTrips'
-import {ListTripsPageHeader} from "./styled"
+import {ListTripsPageHeader, Container, PageListContainer} from "./styled"
 
 const ListTripsPage = () => {
     const history = useHistory()
@@ -31,17 +31,24 @@ const ListTripsPage = () => {
         return <CardListTrips 
         key={eachTrip.name}
         name={eachTrip.name}
-        date={eachTrip.date}/>
+        date={eachTrip.date}
+        tripId={eachTrip.id}
+        planet={eachTrip.planet}
+        description={eachTrip.description}
+        durationInDays={eachTrip.durationInDays}
+        />
     })
 
     return (
-        <div>
+        <PageListContainer>
             <ListTripsPageHeader>
                 <button onClick={() => { goBack(history, "/") }}>Home</button>
-                <button onClick={() => { goToPage(history, "/trips/application") }}>Inscreva-se</button>
             </ListTripsPageHeader>
-            {trips}
-        </div>
+            <Container>
+                <h1>Viagens para o Espaço</h1>
+              {trips}
+            </Container>
+        </PageListContainer>
     )
 }
 
