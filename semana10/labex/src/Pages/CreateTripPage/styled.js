@@ -9,7 +9,7 @@ export const CreateForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 90vh;
+  min-height: 90vh;
   font-size: 20px;
   width: 100%;
   border: 1px solid black;

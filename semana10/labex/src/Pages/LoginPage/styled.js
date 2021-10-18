@@ -25,7 +25,7 @@ export const Meio = styled.div`
  display: flex;
  div{
      width: 50%;
-     height: 90vh;
+     min-height: 90vh;
  }
 `
 export const ImageLogin = styled.div`

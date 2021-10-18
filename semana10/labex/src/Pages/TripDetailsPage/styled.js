@@ -5,7 +5,7 @@ export const PageDetailsContainer = styled.div`
 background: radial-gradient(circle, rgba(227,221,221,0.9441128848643785) 12%, rgba(223,222,230,0.9132140084598841) 45%);
 `
 export const  TripDetailPageContainer = styled.div`
- height: 90vh;
+ min-height: 90vh;
  display: flex;
  flex-direction: column;
  align-items: center;

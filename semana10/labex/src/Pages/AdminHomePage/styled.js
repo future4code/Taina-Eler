@@ -21,7 +21,7 @@ export const AdminHomePageHeader = styled.div`
 export const AdminHomeBody = styled.div`
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  min-height: 90vh;
   align-items: center;
   padding-top: 40px;
   h1{

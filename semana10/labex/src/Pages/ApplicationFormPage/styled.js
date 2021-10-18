@@ -41,7 +41,7 @@ export const ContainerApplication = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 90vh;
+  min-height: 90vh;
   margin-top: 35px;
   button{
     margin-top: 20px;

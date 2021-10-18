@@ -63,7 +63,7 @@ const LoginPage = () => {
                         value={password}
                         onChange={onChangePassword}
                     />
-                    <button onClick={onSubmitVerifyLogin}>Send</button>
+                    <button onClick={onSubmitVerifyLogin}>Login</button>
                 </InputLogin>
             </Meio>
         </LoginPageContainer>

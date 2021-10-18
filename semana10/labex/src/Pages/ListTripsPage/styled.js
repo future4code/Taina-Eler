@@ -19,7 +19,7 @@ export const ListTripsPageHeader = styled.div`
 `
 
 export const Container = styled.div`
-  height: 90vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
