@@ -5,21 +5,23 @@ import SingUpPage from "../pages/SingUpPage/index"
 import FeedPage from "../pages/FeedPage/index"
 import PostPage from "../pages/PostPage/index"
 import ErrorPage from "../pages/ErrorPage/index"
+import Header from "../components/Header/index"
 
 const Router = () =>{
     return(
         <BrowserRouter>
+        <Header/>
           <Switch>
-              <Route exact path={"/"}>
+              <Route exact path={"/login"}>
                   <LoginPage/>
               </Route>
               <Route exact path={"/cadastro"}>
                   <SingUpPage/>
               </Route>
-              <Route exact path={"/feed"}>
+              <Route exact path={"/"}>
                   <FeedPage/>
               </Route>
-              <Route exact path={"/post"}>
+              <Route exact path={"/post/:id"}>
                   <PostPage/>
               </Route>
               <Route>

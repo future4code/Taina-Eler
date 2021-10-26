@@ -1,15 +1,15 @@
 export const goToLogin = (history) =>{
-    history.pushState("/")
+    history.push("/login")
 }
 
 export const goToSingUp = (history) =>{
-    history.pushState("/cadastro")
+    history.push("/cadastro")
 }
 
 export const goToFeed = (history) =>{
-    history.pushState("/feed")
+    history.push("/")
 }
 
-export const goToPost = (history) =>{
-    history.pushState("/post")
+export const goToPost = (history,id) =>{
+    history.push(`/post/${id}`)
 }
