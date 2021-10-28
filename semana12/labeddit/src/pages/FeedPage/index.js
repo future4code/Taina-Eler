@@ -23,7 +23,7 @@ const FeedPage = () => {
 
   return (
     <ScreenContainer>
-      <CreatePost/>
+      <CreatePost getPosts={getPosts}/>
       {postsCards}
     </ScreenContainer>
     

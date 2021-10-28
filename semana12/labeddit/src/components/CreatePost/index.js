@@ -7,10 +7,13 @@ import {ContentsFormContainer, InputsContainer } from "./styled"
 
 const CreatePost = (props) => {
     const [form, onChange, clear] = useForm({ title: "", body: "" })
+   
+    const getNewPosts = props.getPosts
+    console.log(getNewPosts)
 
     const onSubmitForm = (event) => {
         event.preventDefault()
-        createContent(form, clear)
+        createContent(form, clear, getNewPosts)
         console.log(form)
     }
 
@@ -26,9 +29,7 @@ const CreatePost = (props) => {
                             label={'Título'}
                             variant={'outlined'}
                             fullWidth
-                            required
-                            autoFocus
-                            margin={'normal'}
+                            margin={'dense'}
                         />
                         <TextField
                             value={form.body}
@@ -37,8 +38,7 @@ const CreatePost = (props) => {
                             label={'Conteúdo'}
                             variant={'outlined'}
                             fullWidth
-                            required
-                            margin={'normal'}
+                            margin={'dense'}
                         />
                     </InputsContainer>
                     <Button
