@@ -18,6 +18,10 @@ const FeedPage = () => {
       title={post.title}
       body={post.body}
       postId={post.id}
+      commentCount={post.commentCount}
+      userId={post.userId}
+      userVote={post.userVote}
+      voteSum={post.voteSum}
     />
   })
 

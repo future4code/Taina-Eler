@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
@@ -14,6 +14,8 @@ import axios from "axios"
 import {BASE_URL} from "../../constants/urls"
 
 const PostCard = (props) => {
+
+  const [contador, setContador] = useState(0)
   const history = useHistory()
  
   const viewDetails = (id) => {
@@ -21,16 +23,15 @@ const PostCard = (props) => {
   }
 
   const createPostVote = () =>{
-    const body = {
-      direction: 1
-    }
-    axios.post(`${BASE_URL}/posts/${props.postId}/votes`,body, {
+    
+    axios.post(`${BASE_URL}/posts/${props.postId}/votes`,{direction: 1}, {
       headers: {
-        Authorization: localStorage.getItem("token")
+        "Authorization": localStorage.getItem("token")
       }
     } )
     .then((res) =>{
       console.log(res.data)
+
     })
     .catch((error) =>{
       console.log(error)
@@ -64,6 +65,7 @@ const PostCard = (props) => {
       <Interaction>
         <Thumbs>
           <ThumbUpAltIcon onClick={createPostVote()}/>
+          <p>{props.voteSum}</p>
           <ThumbDownAltIcon />
         
         <Coments>
