@@ -2,12 +2,14 @@
 //a)
 
 const minhaString : string  = "exercício 1" 
-// não posso atribuir número, pois está declarada com string
+//não é permitido atribuir algo diferente de string, pois restringi a string
 
 //b)
 
-let meuNumero : number | string = 20
-//pra que recebe também string => number | string
+let meuNumero:number = 10
+//Aceitando números e strings:
+
+//========== let meuNumero: number | string = "Hello" =======
 
 //c) e d)
 

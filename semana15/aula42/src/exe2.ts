@@ -1,5 +1,4 @@
 
-
 //a) A entrada é um array de números e a saída é um objeto
 // com as estatísticas de maior, menor e média
 
@@ -18,7 +17,7 @@ type Amostra = {
 function obterEstatisticas(numeros: number[]) : Estatistica {
 
     const numerosOrdenados: number[] = numeros.sort(
-        (a, b) => a - b
+        (a:number, b:number) => a - b
     )
 
     let soma: number = 0
@@ -27,7 +26,7 @@ function obterEstatisticas(numeros: number[]) : Estatistica {
         soma += num
     }
 
-    const estatisticas = {
+    const estatisticas: Estatistica = {
         maior: numerosOrdenados[numeros.length - 1],
         menor: numerosOrdenados[0],
         media: soma / numeros.length
@@ -38,7 +37,7 @@ function obterEstatisticas(numeros: number[]) : Estatistica {
 
 const amostraDeIdades: Amostra = {
     numeros: [21, 18, 65, 44, 15, 18],
-    obterEstatisticas
+    obterEstatisticas: obterEstatisticas
 }
 
 console.log(amostraDeIdades.obterEstatisticas(amostraDeIdades.numeros))

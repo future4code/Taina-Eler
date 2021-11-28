@@ -1,5 +1,4 @@
 
-
 type Posts = {
     autor: string,
     texto: string
@@ -28,7 +27,7 @@ const posts : Posts[]= [
     }
   ]
 
-  function buscarPostsPorAutor(posts: Posts[], autorInformado: string) : Posts[]{
+  function buscarPostsPorAutor(posts: Posts[], autorInformado: string) : Posts[] | []{
     return posts.filter(
       (post) => {
         return post.autor === autorInformado
