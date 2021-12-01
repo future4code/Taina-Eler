@@ -1,0 +1,23 @@
+[
+    {
+       "id":"001",
+       "cep" :22041011,
+       "logradouro":  "Rua Santa Clara",
+       "numero":  "2",
+       "complemento": "de 1 ao fim - lado ímpar",
+       "bairro":  "Copacabana",
+       "cidade": "Rio de Janeiro",
+       "estado": "RJ"
+    },
+    {
+        "id":"002",
+        "cep" :23555306,
+        "logradouro":  "Rua 10",
+        "numero":  "25",
+        "complemento": "",
+        "bairro":  "Santa Cruz",
+        "cidade": "Rio de Janeiro",
+        "estado": "RJ"
+     }
+    
+ ]
