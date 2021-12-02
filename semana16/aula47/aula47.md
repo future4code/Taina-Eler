@@ -1,7 +1,6 @@
 # Aula 47 - Knex.js 
 
 
-
 ### Exercício 1 
 
 a)Explique como é a resposta que temos quando usamos o raw:
@@ -11,107 +10,196 @@ a)Explique como é a resposta que temos quando usamos o raw:
 b)Faça uma função que busque um ator pelo nome:
 
 ```
-ALTER TABLE Actor CHANGE gender sex VARCHAR(6);
-```
-
-c) O seguinte comando altera o nome da categoria gender por gender, e o limita a 255 caracteres:
 
 ```
-ALTER TABLE Actor CHANGE gender gender VARCHAR(255);
-```
-d) O seguinte comando altera o nome da categoria gender por gender, e o limita a 100 caracteres:
+
+c)Faça uma função que receba um gender retorne a quantidade de itens na tabela Actor com esse gender. Para atrizes, female e para atores male:
 
 ```
-ALTER TABLE Actor CHANGE gender gender VARCHAR(100);
+
 ```
 
 
 ### Exercício 2
 
-a) Escreva uma query que atualize o nome e a data de nascimento do ator com o id 003:
-```
-UPDATE Actor
-SET 
-name="Cláudia Raia",
-birth_date="1966-12-23"
-WHERE id="003";
+a)Uma função que receba um salário e um id e realiza a atualização do salário do ator em questão:
 ```
 
-b)Escreva uma query que atualize o nome da atriz Juliana Paes para JULIANA PAES. Então, escreva outra query para voltar ao nome anterior:
-```
-UPDATE Actor
-SET name="JULIANA PAES"
-WHERE id="005";
-```
-Voltando ao anterior Juliana Paes:
-
-```
-UPDATE Actor
-SET name="Juliana Paes"
-WHERE name="JULIANA PAES";
 ```
 
-c)Escreva uma query que atualize todas as informações do ator com o id 005:
-```
-UPDATE Actor 
-SET
- name="Alexandre Borges",
-salary= 250000,
-birth_date = "1966-02-23",
-gender="male"
-WHERE id="005";
+b)Uma função que receba um id e delete um ator da tabela:
 ```
 
-d) Escreva uma query em que você tente atualizar um dado da tabela que não existe (com um id inválido, por exemplo). Teste, anote e explique o resultado:
 ```
-UPDATE Actor
-SET gender="female"
-WHERE id="010";
-```
-RESPONSE : 0 row(s) affected Rows matched: 0  Changed: 0  Warnings: 0
 
-Essa resposta não diga explicitamente que é um erro, porém como não existe nenhum id 010 consequentemente nenhuma linha sofre alteração.
+c)Uma função que receba um gender e devolva a média dos salários de atrizes ou atores desse gender:
+```
+
+```
 
 
 ### Exercício 3
 
-a)Escreva uma query que apague a atriz com o nome Cláudia Raia:
-```
-DELETE FROM Actor
-WHERE name="Cláudia Raia";
+a)Crie um endpoint com as especificações:
+* Usar a função get do express;
+* Definir o path param com a chave id: /actor/:id. Dessa forma, poderemos acessar o endpoint assim: http://localhost:3000/user/id-do-usuario.
+
 ```
 
-b)Escreva uma query que apague todos os atores (do gênero male) com o salário maior do que R$1.000.000,00:
 ```
-DELETE FROM Actor
-WHERE gender="male" AND salary > 1000000;
+
+b)Crie um endpoint agora com as seguintes especificações:
+* Deve ser um GET (/actor);
+* Receber o gênero como um query param (/actor?gender=);
+* Devolver a quantidade de atores/atrizes desse gênero.
+
+```
+
 ```
 
 
 ### Exercício 4
 
-a)Escreva uma query que pegue o maior salário de todos os atores e atrizes:
-```
-SELECT MAX(salary)
-FROM Actor;
+a)Crie um endpoint agora com as seguintes especificações:
+* Deve ser um PUT (/actor);
+* Receber o salário e o id pelo body;
+* Simplesmente atualizar o salário do ator com id em questão .
+
 ```
 
-b)Escreva uma query que pegue o menor salário das atrizes:
-```
-SELECT MIN(salary) FROM Actor 
-WHERE gender="female";
 ```
 
-c)Escreva uma query que pegue a quantidade de atrizes:
-```
-SELECT COUNT(*) FROM Actor
-WHERE gender="female";
+
+b)Crie um endpoint agora com as seguintes especificações:
+* Deve ser um DELETE (/actor/:id);
+* Receber id do ator como path param;
+* Simplesmente deletar o ator da tabela.
+
 ```
 
-d) Escreva uma query que pegue a soma de todos os salários:
-```
-SELECT SUM(salary) FROM Actor;
 ```
 
 
 
+
+
+### Exercício 5
+Criar um endpoint com as especificações:
+* Deve ser um POST (/movie);
+* Receber todas as informações pelo body;
+* Criar o filme na tabela.
+
+Função para criar o filme:
+```
+const createMovie = async(
+    id:string,
+    title:string,
+    synopsis:string,
+    launch_date:Date
+
+):Promise<void> => {
+    await connection
+    .insert({
+        id: id,
+        title:title,
+        synopsis:synopsis,
+        launch_date:launch_date
+    })
+    .into("Movies")
+}
+```
+
+Requisição:
+```
+app.post("/movie", async(req:Request, res:Response) => {
+    try {
+        await createMovie(
+            req.body.id,
+            req.body.title,
+            req.body.synopsis,
+            req.body.launch_date
+        )
+
+        res.status(200).send("Filme criado")
+    } catch (error: any) {
+        res.status(400).send({message:error.message})
+    }
+
+})
+```
+
+
+### Exercício 6
+Criar um endpoint com as especificações:
+* Deve ser um GET (/movie/all);
+* Não recebe nada;
+* Retorna todos os filmes. Ele deve retornar, no máximo, uma lista com 15 itens.
+
+Função de retornar no máximo 15 filme:
+```
+const return15Movies = async():Promise<any> => {
+    const resultado = await connection
+    .limit(15)
+    .into("Movies")
+
+    return resultado
+}
+
+```
+
+Requisição:
+```
+app.get("/movie/all", async(req:Request, res:Response) => {
+    try {
+        const result = await return15Movies()
+        res.status(200).send(result)
+    } catch (error: any) {
+        res.status(400).send({message:error.message})
+    }
+})
+```
+
+
+### Exercício 7
+Criar um endpoint com as especificações:
+* Deve ser um GET (/movie/search);
+* Deve receber o termo de busca como uma query string (/movie/search?query=);
+* Faz a busca entre todos os filmes que tenham o termo de busca no nome ou na sinopse. Além disso, a lista deve vir ordenada pela data de lançamento.
+
+Função de retornar o filme pelo termo de busca no nome ou sinopse:
+
+**MÉTODO RAW**
+```
+const returnTermo = async(palavra:string):Promise<any> => {
+    const resultado = await connection.raw(`
+    SELECT * FROM Movies
+     WHERE title LIKE "%${palavra}%" OR synopsis LIKE "%${palavra}%"
+     ORDER BY launch_date ASC;
+    `)  
+    return resultado[0]
+}
+```
+
+**QUERY BUILDER**
+```
+const returnTermo = async(palavra:string):Promise<any> => {
+    const resultado = await connection("Movies")
+    .where("title", "like", `%${palavra}%`)
+    .orWhere("synopsis", "like", `%${palavra}%`)
+    .orderBy('launch_date');
+    
+    return resultado
+}
+```
+
+Requisição:
+```
+app.get("/movie/search", async(req:Request, res:Response) => {
+    try {
+        const movies = await returnTermo(req.query.palavra as string)
+        res.status(200).send(movies)
+    } catch (error: any) {
+        res.status(400).send({message:error.message})
+    }
+})
+```
