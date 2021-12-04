@@ -10,3 +10,6 @@ export type User = {
     type: TYPE,
     age: number
 }
+
+
+//http://localhost:3003/actor/:id   
