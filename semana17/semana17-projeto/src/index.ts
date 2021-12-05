@@ -4,6 +4,7 @@ import getAllUsers from "./endpoints/getAllUsers"
 import purchaseRecord from "./endpoints/purchaseRecord"
 import resisterProducts from "./endpoints/registerProducts"
 import registerUsers from "./endpoints/registerUsers"
+import searchUserPurchases from "./endpoints/searchUserPurchases"
 
 
 
@@ -11,7 +12,8 @@ import registerUsers from "./endpoints/registerUsers"
 app.get("/users", getAllUsers)
 app.post("/users", registerUsers)
 
-app.post("/products", resisterProducts)
 app.get("/products", getAllProducts)
+app.post("/products", resisterProducts)
 
+app.get("/users/:user_id/purchases", searchUserPurchases)
 app.post("/purchases", purchaseRecord)

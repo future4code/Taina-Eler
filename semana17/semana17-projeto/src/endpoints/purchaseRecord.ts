@@ -1,19 +1,11 @@
-//labecommerce_purchases
-/*- `**id**`: string (PRIMARY KEY)
-- `**user_id**`: string (FOREIGN KEY) referencia uma `**id**` de `**labecommerce_users**`
-- `**product_id**`: string (FOREIGN KEY) referencia uma `**id**` de `**labecommerce_products**`
-- `**quantity**`: number
-- `**total_price**`: number (float) */
-
-
 import { Request, Response } from "express";
-import connection from "../connection";
+import connection from "../data/connection";
 import { Product, Purchase, User } from "../types";
 
 
 const purchaseRecord = async(req:Request, res:Response): Promise<void> => {
     try {
-        const {product_id, user_id, quantity} = req.body
+        const {user_id,product_id, quantity} = req.body
 
         const [user]: User[] = await connection("labecommerce_users")
         .select()
@@ -37,15 +29,15 @@ const purchaseRecord = async(req:Request, res:Response): Promise<void> => {
 
         const purchase: Purchase = {
             id: Date.now().toString(),
-            product_id,
             user_id,
+            product_id,
             quantity,
             total_price
         }
 
-        await connection("labecommerce_purchase").insert(purchase)
+        await connection("labecommerce_purchases").insert(purchase)
 
-        res.send({message: "Produto criado com sucesso"})
+        res.send({message: "Compra realizada com sucesso"})
 
 
     } catch (error: any) {

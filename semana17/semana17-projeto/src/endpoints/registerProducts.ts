@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import connection from "../connection";
-import { Product, User } from "../types";
+import connection from "../data/connection";
+import { Product} from "../types";
 
-//tabela labecommerce_products
+
 
 const resisterProducts = async(req:Request, res:Response): Promise<void> => {
     try {
@@ -19,9 +19,9 @@ const resisterProducts = async(req:Request, res:Response): Promise<void> => {
             image_url
         }
 
-        await connection("tabela labecommerce_products").insert(product)
+        await connection("labecommerce_products").insert(product)
 
-        res.send({message: "Produto criado com sucesso"})
+        res.send({message:"Produto criado com sucesso"})
 
 
     } catch (error: any) {

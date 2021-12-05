@@ -1,8 +1,7 @@
 import {Request, Response} from "express"
-import connection from "../connection"
+import connection from "../data/connection"
 import { User } from "../types"
 
-//Criar a tabela labecommerce_users
 const   registerUsers = async (req: Request, res:Response):Promise<void> => {
     try {
         const {name, email, password} = req.body //desestruturação
