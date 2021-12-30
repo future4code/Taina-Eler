@@ -2,10 +2,14 @@ import { Request, Response } from "express"
 import { connection } from "../data/connection"
 
 
-export const getAllUsers = async(req: Request,res: Response): Promise<void> =>{
+export const getUserByName = async(req: Request,res: Response): Promise<void> =>{
     try {
+      const name = req.query.name || "%"
+      
 
        const result = await connection("aula49_exercicio")
+       .where("name", "LIKE", `%${name}%`)
+      
 
        const users = result.map(user)
  
