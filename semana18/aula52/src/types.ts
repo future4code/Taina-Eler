@@ -161,3 +161,34 @@ export class UserAccount {
   
 }
 
+
+export class Bank {
+    private accounts: UserAccount[];
+        // private transaction: Transaction[]
+      
+        constructor(
+            accounts: UserAccount[]
+            // transaction: Transaction[]
+            ) {
+          this.accounts = accounts;
+        //   this.transaction = transaction
+        }
+    setAccounts(newAccounts: UserAccount) : void {
+        console.log(this.accounts)
+        this.accounts.push(newAccounts)
+    }
+    
+    getAccounts(): UserAccount[]{
+        return this.accounts
+    }
+    
+    //         setTransactions(newTransaction: Transaction) : void {
+    //                 console.log(this.transaction)
+    //                 this.transaction.push(newTransaction)
+    // }
+            
+    //         getTransaction(): Transaction[]{
+    //                 return this.transaction
+    //                 }
+
+  }
