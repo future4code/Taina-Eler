@@ -1,6 +1,7 @@
 import { Customer } from "./class/Customer";
 import { User } from "./class/User";
-import { Client } from "./Light/Client";
+import { Client} from "./Light/Client";
+import { Commerce, Industry, Place, Residence } from "./Light/Residents";
 
                                         /*HERANÇA */
 //---------------------------------------------------------------------------------------------//
@@ -29,14 +30,34 @@ import { Client } from "./Light/Client";
                                         /*POLIMORFISMO */
 //---------------------------------------------------------------------------------------------//
 //Exercício 1
-const client:Client = {
-    name: "Carlos",
-    registrationNumber: 123456789,
-    consumedEnergy: 25,
-    calculateBill : () => {
-        return 2
-    }
-}
+// const client:Client = {
+//     name: "Carlos",
+//     registrationNumber: 123456789,
+//     consumedEnergy: 25,
+//     calculateBill : () => {
+//         return 2
+//     }
+// }
 
-console.log(client)
-console.log(client.calculateBill())
+// console.log(client)
+// console.log(client.calculateBill())
+
+//Exercício 2
+
+// const newPlace: Place = new Place("22222222222") //Não pode pois é abstract
+
+//Exercício 3
+
+/*Agora, crie uma instância de cada uma das classes novas. 
+Imprima no console o CEP de cada uma delas, através do método getCep herdado da classe Place.*/
+
+const newResidence: Residence = new Residence(5,"123456789")
+console.log(newResidence.getCep())
+
+const newCommerce: Commerce = new Commerce(5,"987654321")
+console.log(newCommerce.getCep())
+
+const newIndustry: Industry = new Industry(5,"213546879")
+console.log(newIndustry.getCep())
+
+

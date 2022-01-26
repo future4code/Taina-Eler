@@ -40,46 +40,17 @@ a)Quais propriedades você conseguiu imprimir? Teve alguma que não foi possíve
 * Todas as propriedades, porém o método ***calculateBill*** por ser uma função(método), só é possível ver seu valor invocando a ***variável.método***.
 
 
-### Exercício 7
-Criar um endpoint com as especificações:
-* Deve ser um GET (/movie/search);
-* Deve receber o termo de busca como uma query string (/movie/search?query=);
-* Faz a busca entre todos os filmes que tenham o termo de busca no nome ou na sinopse. Além disso, a lista deve vir ordenada pela data de lançamento.
+### Exercício 2
+a)Mesmo sabendo que não é possível, tente criar uma instância dessa classe (ou seja: new Place(...)). Qual foi o erro que o Typescript gerou?
+* RESPOSTA DO TYPESCRIPT : "Cannot create an instance of an abstract class.".
 
-Função de retornar o filme pelo termo de busca no nome ou sinopse:
+b)Pense e responda: o que precisaríamos fazer para conseguir efetivamente criar uma instância dessa classe?
+* Para criar uma instância de uma classe abstrata precisamos declarar uma classe filha e criar uma instância dessa última
 
-**MÉTODO RAW**
-```
-const returnTermo = async(palavra:string):Promise<any> => {
-    const resultado = await connection.raw(`
-    SELECT * FROM Movies
-     WHERE title LIKE "%${palavra}%" OR synopsis LIKE "%${palavra}%"
-     ORDER BY launch_date ASC;
-    `)  
-    return resultado[0]
-}
-```
 
-**QUERY BUILDER**
-```
-const returnTermo = async(palavra:string):Promise<any> => {
-    const resultado = await connection("Movies")
-    .where("title", "like", `%${palavra}%`)
-    .orWhere("synopsis", "like", `%${palavra}%`)
-    .orderBy('launch_date');
-    
-    return resultado
-}
-```
+### Exercício 3
+a)Por que a Place não é uma interface?
+* Place é uma classe porque precisa ter um acesso restrito a um dos seus atributos, o que é impossível de se fazer em interfaces.
 
-Requisição:
-```
-app.get("/movie/search", async(req:Request, res:Response) => {
-    try {
-        const movies = await returnTermo(req.query.palavra as string)
-        res.status(200).send(movies)
-    } catch (error: any) {
-        res.status(400).send({message:error.message})
-    }
-})
-```
+b)Por que a classe Place é uma Classe Abstrata?
+* Por fim, ela é abstrata por um motivo simples. O nosso sistema possui 3 tipos de lugares e preferimos criar uma classe para representar cada um deles. Então não há motivos para querermos instanciar um objeto do tipo Place porque, no nosso contexto, todos os casos deles já estão cobertos por outras classes. Isso responde à terceira pergunta: Place é abstrata porque não enxergamos uma situação em que seria necessário criar uma instância dessa classe.
