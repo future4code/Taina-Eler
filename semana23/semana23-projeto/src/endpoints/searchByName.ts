@@ -3,18 +3,18 @@ import { connection } from "../data/connection";
 
 export const searchByName = async(req:Request, res:Response):Promise<void> => {
     try {
-        const {name} = req.params
 
-        if(!name){
-            throw new Error("Insira o nome")
-        }
+        const name = req.query.name || "%"
 
-        const existName = await connection("pokemonGo").where({name})
+        const [existName] = await connection("pokemonGo")
+            .where("name", "LIKE", `%${name}%`)
+            
         if(!existName){
             throw new Error("Pokemon não cadastrado")
         }
 
-        const result = await connection("pokemonGo").where({name})
+        const result = await connection("pokemonGo")
+            .where("name", "LIKE", `%${name}%`)
 
         res.status(200).send(result)
     } catch (error:any) {
