@@ -1,36 +1,32 @@
 import { Request, Response } from "express"
 import { connection } from "../data/connection"
+import functionGetUser from "../data/functionGetUser"
 import functionToCreateUser from "../data/functionToCreateUser"
 import AuthenticationData from "../services/AuthenticationData"
 import IdGeneration from "../services/generateId"
 
 
-const createUser = async(req:Request, res:Response):Promise<void> => {
+const login = async(req:Request, res:Response):Promise<void> => {
     try {
         const {email, password} = req.body
 
-        if(!email || !password || email.indexOf("@")===-1 || password.length < 6){
+        if(!email || !password || email.indexOf("@")===-1){
             res.statusCode = 422
          throw new Error("Preencha os campos 'email' e 'password'")
         }
 
         //VERIFICAR SE O USUÁRIO JÁ EXISTE
-        const [user] = await connection("aula55_User")
-            .where({email})
+        const user = await functionGetUser(email)
 
-        if (user) {
-            res.statusCode = 409
-            throw new Error('Email já cadastrado')
+        if (!user || user.password !==password) {
+            res.statusCode = 401
+            res.statusMessage = "Credenciais inválidas"
+             throw new Error()
         }
 
-        //GERAR ID
-        const id = new IdGeneration().generateId()
+        //VAI GERAR O TOKEN E DEVOLVE-LO
 
-        await functionToCreateUser(id,email,password)
-
-        //PEGAR O TOKEN
-
-        const token = new AuthenticationData().generateToken({id})
+        const token = new AuthenticationData().generateToken({id:user.id})
 
         res.status(200).send({token});
     } catch (error:any) {
@@ -38,4 +34,7 @@ const createUser = async(req:Request, res:Response):Promise<void> => {
     }
 }
 
-export default createUser
+export default login
+
+
+
