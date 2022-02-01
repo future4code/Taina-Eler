@@ -1,0 +1,32 @@
+{
+  "name": "semana23-projeto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pokemon": "tsc  && node ./build/dataPokemon/pokemon.js",
+    "dev": "ts-node-dev ./src/index.ts",
+		"start": "tsc && node ./build/index.js",
+    "migrations": "tsnd ./src/data/migrations.ts",
+    "tratando": "tsnd ./src/data/tratando.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.13",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@types/knex": "^0.16.1",
+    "cors": "^2.8.5",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "knex": "^1.0.1",
+    "mysql": "^2.18.1",
+    "xlsx-to-json": "^0.3.0"
+  }
+}
