@@ -11,7 +11,7 @@ export const createPayment = async(req:Request, res:Response) => {
 
         if(!id_client || !name ||  !cpf || !email || !amount || !type){
             res.statusCode = 422
-            throw new Error("Preencha os campos 'id_client','name', 'cpf', 'email', 'amount' e 'type'.")
+            throw new Error("Preencha os campos 'id_client:1-Padaria, 2-Mercado, 3-Papelaria','name', 'cpf', 'email', 'amount' e 'type'.")
         }
 
         const id = new IdGenerator().generateId()
@@ -26,26 +26,31 @@ export const createPayment = async(req:Request, res:Response) => {
             type
         }
 
-        const paymentType = () => {
+        const paymentType = async() => {
             if(type === TYPE_PAYMENT.BOLETO){
-            return new PaymentMethod().boletoPayment()
-            }else if (type === TYPE_PAYMENT.CARTAO){
-                const newVarivel = {... newPurchase,
-                card_name,card_number,card_date,card_cvv}
-            if(!newVarivel.card_name || !newVarivel.card_number || !newVarivel.card_date || !newVarivel.card_cvv){
-                res.statusCode = 422
-                throw new Error("Preencha os campos 'card_name','card_number', 'card_date', 'card_cvv'.")
-            }else{
-                return "Cartão aprovado"
+                return new PaymentMethod().boletoPayment()
             }
+
+
+            if(type === TYPE_PAYMENT.CARTAO){
+                const purchaseCard = {... newPurchase,
+                card_name,card_number,card_date,card_cvv}
+
+                
+                    
+                if(!purchaseCard.card_name || !purchaseCard.card_number || !purchaseCard.card_date || !purchaseCard.card_cvv){
+                    res.statusCode = 422
+                    throw new Error("Preencha os campos 'card_name','card_number', 'card_date', 'card_cvv'.")
+                }else{
+                    return "Cartão aprovado"
+                }
+
             }
         }
 
         await connection("wirecard_purchase").insert(newPurchase)
 
-       
-
-        res.status(200).send({"Compra aprovada": paymentType()})
+        res.status(200).send({"Compra aprovada": await paymentType()})
         
     } catch (error:any) {
         res.status(400).send({message: error.sqlMessage || error.message})
