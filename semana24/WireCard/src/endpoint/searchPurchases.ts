@@ -10,6 +10,10 @@ export const searchPurchases = async(req:Request, res:Response) => {
             JOIN wirecard_purchase as B ON C.id = B.id_client;
         `)
 
+        if(result.length === 0){
+            throw new Error("Nenhuma compra registrada!")
+        }
+
 
         res.status(200).send(result)
         

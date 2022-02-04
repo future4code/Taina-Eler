@@ -9,9 +9,17 @@ export const createPayment = async(req:Request, res:Response) => {
 
         const {id_client, name, cpf, email, amount, type, card_name,card_number, card_date,card_cvv} = req.body
 
-        if(!id_client || !name ||  !cpf || !email || !amount || !type){
+        if(!id_client || !name || !amount || !type){
             res.statusCode = 422
             throw new Error("Preencha os campos 'id_client:1-Padaria, 2-Mercado, 3-Papelaria','name', 'cpf', 'email', 'amount' e 'type'.")
+        }
+
+        if (!email || email.indexOf("@") === -1) {
+            throw new Error("Email inválido");
+        }
+
+        if (!cpf || cpf.length !== 11) {
+            throw new Error("CPF inválido");
         }
 
         const id = new IdGenerator().generateId()
@@ -38,7 +46,7 @@ export const createPayment = async(req:Request, res:Response) => {
 
                 
                     
-                if(!purchaseCard.card_name || !purchaseCard.card_number || !purchaseCard.card_date || !purchaseCard.card_cvv){
+                if(!purchaseCard.card_name || !purchaseCard.card_number || purchaseCard.card_number.toString().length !==16  || !purchaseCard.card_date || !purchaseCard.card_cvv || purchaseCard.card_cvv.toString().length !==3){
                     res.statusCode = 422
                     throw new Error("Preencha os campos 'card_name','card_number', 'card_date', 'card_cvv'.")
                 }else{

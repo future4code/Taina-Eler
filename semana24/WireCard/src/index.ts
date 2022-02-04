@@ -1,7 +1,6 @@
 import { app } from "./app";
-import { createPayment } from "./endpoint/createPayment";
-import { searchPurchases } from "./endpoint/searchPurchases";
+import { routerPurchase } from "./routes/routerPurchase";
 
-app.post("/purchase", createPayment)
+app.use("/purchase", routerPurchase)
 
-app.get("/purchase", searchPurchases)
+
