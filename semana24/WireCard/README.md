@@ -1,12 +1,14 @@
-{
-    "id_client":"11b92304-08f9-407b-a1bf-05bd043e2b29",
-    "name": "João",
-    "cpf": "123.456.789-99",
-    "email": "joao@email.com",
-    "amount": 30,
-    "type": "CARTAO",
-    "card_name": "jsdhshisfjljflijfjj",
-    "card_number": "54654654313",
-    "card_date": "ljfkljdflkjld",
-    "card_cvv":123
-}
+# WIRECARD
+
+### Introdução
+Esta API realiza compras através do modo ***BOLETO*** e modo ***CARTAO***, além de mostras todas as compras feitas.
+
+### Overview
+Things that the developers should know about
+Ao fazer uma compra via boleto, é retornado o código para pagamento. E ao fazer via cartão, é retornada uma mensagem de aprovado.
+
+Ambas url's de compras são iguais, porém é exemplificado duas possibilidades para representar o ***body*** a ser passado mediante a compra por boleto ou cartão.
+
+***Para ambas as compras, deve ser passado um cpf em formato string com 11 caracteres.***
+
+Para as compras com ***cartão*** os valores do  ***card_number*** e do ***card_cvv***, devem ser passados em formato string com 16 caracteres e 3 caracteres, respectivamente.
