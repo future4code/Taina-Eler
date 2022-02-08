@@ -1,0 +1,27 @@
+{
+  "name": "numeroSolitario",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jest.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.3",
+    "ts-node-dev": "^1.1.8"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.16",
+    "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules ./src/index.ts",
+    "test": "clear && jest",
+    "start": "tsc && node ./build/src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
